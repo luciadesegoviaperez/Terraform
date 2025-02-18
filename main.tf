@@ -17,4 +17,8 @@
  resource "azurerm_resource_group" "luciaterraform" {
    name     = "luciaterraform"
    location = "eastus2"
+
+   tags = {
+     cost_center = "contoso research"
+   }
  }
