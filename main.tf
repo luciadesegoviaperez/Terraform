@@ -1,5 +1,4 @@
-# Specifiy the provider and version
- terraform {
+terraform {
    required_providers {
      azurerm = {
        source  = "hashicorp/azurerm"
@@ -8,17 +7,26 @@
    }
  }
     
- # Configure the Microsoft Azure Provider
  provider "azurerm" {
    features {}
  }
     
- # Create the very first resource
- resource "azurerm_resource_group" "luciaterraform" {
-   name     = "luciaterraform"
-   location = "eastus2"
-
+ locals {
+   prefix = "lucialab02"
+   region = "eastus2"
    tags = {
      cost_center = "contoso research"
    }
+ }
+    
+ resource "azurerm_resource_group" "contoso_rg" {
+   name     = "${local.prefix}_rg"
+   location = local.region
+   tags     = local.tags
+ }
+    
+ resource "azurerm_resource_group" "contoso_dev_rg" {
+   name     = "${local.prefix}_dev_rg"
+   location = local.region
+   tags     = local.tags
  }
